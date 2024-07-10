@@ -20,7 +20,7 @@ $GLOBALS['BE_FFL']['tag'] = 'TagField';
 /**
  * Front end modules
  */
-$GLOBALS['FE_MOD']['tags'] = ArrayUtil::arrayInsert($GLOBALS['FE_MOD']['tags'], 1, array(
+$GLOBALS['FE_MOD']['tags'] = ArrayUtil::arrayInsert($GLOBALS['FE_MOD']['tags'] ?? [], 1, array(
     'tagcloud'            => 'ModuleTagCloud',
     'tagcloudarticles'    => 'ModuleTagCloudArticles',
     'taggedArticleList'   => 'ModuleTaggedArticleList',
@@ -33,7 +33,7 @@ $GLOBALS['FE_MOD']['tags'] = ArrayUtil::arrayInsert($GLOBALS['FE_MOD']['tags'], 
     'tagcloudnews'        => 'ModuleTagCloudNews'
 ));
 
-$GLOBALS['FE_MOD']['miscellaneous'] = ArrayUtil::arrayInsert($GLOBALS['FE_MOD']['miscellaneous'], 3, array(
+$GLOBALS['FE_MOD']['miscellaneous'] = ArrayUtil::arrayInsert($GLOBALS['FE_MOD']['miscellaneous'] ?? [], 3, array(
     'globalArticleList'    => 'ModuleGlobalArticlelist'
 ));
 
@@ -111,15 +111,3 @@ $GLOBALS['tags']['showInFeeds'] = true;
 
 $GLOBALS['TL_FFL']['tag'] = 'TagFieldMemberFrontend';
 
-if (is_array($GLOBALS['TL_CRON']['daily'])) {
-    foreach ($GLOBALS['TL_CRON']['daily'] as $key => $arr) {
-        if (is_array($arr) && strcmp($arr[0], 'Calendar') == 0 && strcmp($arr[1], 'generateFeeds') == 0) {
-            // Fix calendar feed cron job
-            $GLOBALS['TL_CRON']['daily'][$key] = array('CalendarTags', 'generateFeeds');
-        }
-        if (is_array($arr) && strcmp($arr[0], 'News') == 0 && strcmp($arr[1], 'generateFeeds') == 0) {
-            // Fix news feed cron job
-            $GLOBALS['TL_CRON']['daily'][$key] = array('NewsTags', 'generateFeeds');
-        }
-    }
-}
