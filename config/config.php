@@ -1,5 +1,7 @@
 <?php
 
+use Contao\ArrayUtil;
+
 /**
  * Contao Open Source CMS - tags extension
  *
@@ -16,9 +18,7 @@ $GLOBALS['BE_FFL']['tag'] = 'TagField';
 /**
  * Front end modules
  */
-
-// Statt array_insert
-$fe_mod_tags = array(
+$GLOBALS['FE_MOD']['tags'] = ArrayUtil::arrayInsert($GLOBALS['FE_MOD']['tags'], 1, array(
     'tagcloud'            => 'ModuleTagCloud',
     'tagcloudarticles'    => 'ModuleTagCloudArticles',
     'taggedArticleList'   => 'ModuleTaggedArticleList',
@@ -29,13 +29,11 @@ $fe_mod_tags = array(
     'tagcloudevents'      => 'ModuleTagCloudEvents',
     'tagcloudmembers'     => 'ModuleTagCloudMembers',
     'tagcloudnews'        => 'ModuleTagCloudNews'
-);
-array_splice($GLOBALS['FE_MOD']['tags'], 1, 0, $fe_mod_tags);
+));
 
-$misc_mods = array(
+$GLOBALS['FE_MOD']['miscellaneous'] = ArrayUtil::arrayInsert($GLOBALS['FE_MOD']['miscellaneous'], 3, array(
     'globalArticleList'    => 'ModuleGlobalArticlelist'
-);
-array_splice($GLOBALS['FE_MOD']['miscellaneous'], 3, 0, $misc_mods);
+));
 
 $GLOBALS['FE_MOD']['news']['newslist'] = 'ModuleNewsListTags';
 $GLOBALS['FE_MOD']['news']['newsarchive'] = 'ModuleNewsArchiveTags';
@@ -61,18 +59,18 @@ if (TL_MODE == 'BE') {
      * CSS files
      */
     if (isset($GLOBALS['TL_CSS']) && \is_array($GLOBALS['TL_CSS'])) {
-        array_splice($GLOBALS['TL_CSS'], 1, 0, ['system/modules/tags/assets/tag.css']);
+        $GLOBALS['TL_CSS'] = ArrayUtil::arrayInsert($GLOBALS['TL_CSS'], 1, array('system/modules/tags/assets/tag.css'));
     } else {
-        $GLOBALS['TL_CSS'] = ['system/modules/tags/assets/tag.css'];
+        $GLOBALS['TL_CSS'] = array('system/modules/tags/assets/tag.css');
     }
 
     /**
      * JavaScript files
      */
     if (isset($GLOBALS['TL_JAVASCRIPT']) && \is_array($GLOBALS['TL_JAVASCRIPT'])) {
-        array_splice($GLOBALS['TL_JAVASCRIPT'], 1, 0, ['system/modules/tags/assets/tag.js']);
+        $GLOBALS['TL_JAVASCRIPT'] = ArrayUtil::arrayInsert($GLOBALS['TL_JAVASCRIPT'], 1, array('system/modules/tags/assets/tag.js'));
     } else {
-        $GLOBALS['TL_JAVASCRIPT'] = ['system/modules/tags/assets/tag.js'];
+        $GLOBALS['TL_JAVASCRIPT'] = array('system/modules/tags/assets/tag.js');
     }
 }
 
