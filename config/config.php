@@ -2,6 +2,7 @@
 
 use Contao\ArrayUtil;
 use Contao\System;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Contao Open Source CMS - tags extension
@@ -55,7 +56,9 @@ if (array_key_exists('last_events', $GLOBALS['FE_MOD']['events'])) {
 $GLOBALS['TL_CTE']['texts']['headline'] = 'ContentHeadlineTags';
 $GLOBALS['TL_CTE']['media']['gallery'] = 'ContentGalleryTags';
 
-if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest()) {
+$request = System::getContainer()->get('request_stack')->getCurrentRequest();
+
+if ($request !== null && System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request)) {
     /**
      * CSS files
      */
