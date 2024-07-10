@@ -1,6 +1,7 @@
 <?php
 
 use Contao\ArrayUtil;
+use Contao\System;
 
 /**
  * Contao Open Source CMS - tags extension
@@ -54,7 +55,7 @@ if (array_key_exists('last_events', $GLOBALS['FE_MOD']['events'])) {
 $GLOBALS['TL_CTE']['texts']['headline'] = 'ContentHeadlineTags';
 $GLOBALS['TL_CTE']['media']['gallery'] = 'ContentGalleryTags';
 
-if (TL_MODE == 'BE') {
+if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest()) {
     /**
      * CSS files
      */
