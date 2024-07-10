@@ -1,5 +1,4 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
-
+<?php 
 /**
  * @copyright  Helmut Schottmüller 2009
  * @author     Helmut Schottmüller <https://github.com/hschottm>
